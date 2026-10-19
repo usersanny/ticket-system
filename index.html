@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Van Ticketing Kiosk</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">🚐 VAN TICKETING KIOSK</div>
+  <ol class="steps">
+    <li data-s="1" class="on">1 Trip</li><li data-s="2">2 Seat</li><li data-s="3">3 Payment</li>
+  </ol>
+  <div class="clock"><b id="clkTime"></b><span id="clkDate"></span></div>
+</header>
+
+<main>
+<!-- SCREEN 1 : destination, category, ID -->
+<section id="s1" class="screen on">
+  <div class="col">
+    <div class="dd" id="dd">
+      <button type="button" id="ddBtn" class="field">SELECT DESTINATION <i>⌄</i></button>
+      <ul id="ddList" hidden></ul>
+    </div>
+    <h3>SELECT CATEGORY</h3>
+    <div class="cats" id="cats"></div>
+    <div class="idrow">
+      <label for="idInput">Enter ID#:</label>
+      <input id="idInput" class="field" readonly inputmode="none" placeholder="Not required for Regular" disabled>
+    </div>
+    <div id="fareHint" class="hint"></div>
+  </div>
+  <div class="col">
+    <div class="keypad" id="keypad"></div>
+    <button class="primary" id="toSeat" disabled>Next: Select Seat →</button>
+  </div>
+</section>
+
+<!-- SCREEN 2 : seat + preview -->
+<section id="s2" class="screen">
+  <div class="col wide">
+    <p class="van">VAN/MINIBUS #: <b id="vanNo"></b></p>
+    <h3>SELECT NUMBER SEAT</h3>
+    <div class="selrow">Seat selected: <output id="seatOut">–</output><button id="seatOk" disabled>OK</button></div>
+    <div class="van-box"><span class="front">FRONT ▶</span><div id="seatMap"></div></div>
+    <div class="legend"><i class="lg taken"></i>Seat Taken <i class="lg sel"></i>Selected Seat <i class="lg free"></i>Available</div>
+  </div>
+  <div class="col">
+    <h3 class="pv">Preview:</h3>
+    <div id="prevTicket"></div>
+    <div class="btns"><button id="back2">← Back</button><button class="primary" id="confirm" disabled>Confirm</button></div>
+  </div>
+</section>
+
+<!-- SCREEN 3 : payment -->
+<section id="s3" class="screen">
+  <div class="pay">
+    <label>PAYMENT:</label><div class="amt"><span>₱</span><b id="payAmt">0</b></div>
+    <label>FARE:</label><div class="amt"><span>₱</span><b id="fareAmt">0</b></div>
+    <label>CHANGE:</label><div class="amt"><span>₱</span><b id="chgAmt">0</b></div>
+    <div id="payMsg" class="msg">Please insert bills / coins</div>
+    <details class="sim" open>
+      <summary>Bill &amp; coin acceptor (simulator)</summary>
+      <div id="sim"></div>
+    </details>
+  </div>
+  <div class="col">
+    <div id="payTicket"></div>
+    <div class="btns"><button id="cancel">Cancel</button><button class="primary" id="getTicket" disabled>Get Ticket</button></div>
+  </div>
+</section>
+</main>
+
+<div id="done" class="overlay" hidden><div><h2>✅ Ticket printed</h2><p>Thank you! Have a safe trip.</p></div></div>
+<div id="printTicket"></div>
+<script src="script.js"></script>
+</body>
+</html>
